@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(215, 202, 185, 0.45);
+  height: 100%;
+}
+
+.logo {
+  height: 130px;
+  margin-bottom: 10px;
+}
+
+.body {
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+}
