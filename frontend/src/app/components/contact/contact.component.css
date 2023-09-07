@@ -1,0 +1,22 @@
+.html {
+  display: inline;
+}
+
+.contacto {
+  height: auto;
+  width: 30px;
+}
+
+.boton {
+  width: 50px;
+  height: 40px;
+  margin: 1px;
+  border-radius: 15px;
+  background-color: white;
+}
+
+.boton:hover {
+  background-color: rgb(194, 190, 190);
+  transition: all, 1s;
+
+}
