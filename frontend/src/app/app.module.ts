@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
+
 // Componentes 
 import { LoginComponent } from './components/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
@@ -20,6 +21,10 @@ import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HelpsComponent } from './components/helps/helps.component';
+import { ProductInformationComponent } from './components/product-information/product-information.component';
+
+
+
 
 
 @NgModule({
@@ -32,7 +37,8 @@ import { HelpsComponent } from './components/helps/helps.component';
     SpinnerComponent,
     FooterComponent,
     ContactComponent,
-    HelpsComponent
+    HelpsComponent,
+    ProductInformationComponent
   ],
   imports: [
     BrowserModule,
