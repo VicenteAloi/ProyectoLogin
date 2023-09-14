@@ -12,9 +12,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
-  userName: string = '';
   password: string = '';
+  email: string = '';
+  dni: string = '';
+  name: string = '';
+  surname: string = '';
   loading: boolean = false;
 
   constructor(private toastr: ToastrService,
@@ -25,14 +27,18 @@ export class LoginComponent {
 
   login() {
     //Validar que el usuario ingrese datos
-    if (this.userName == '' || this.password == '') {
+    if (this.email == '' || this.password == '') {
       this.toastr.error('Todos los Campos son Obligatorios', 'Error');
       return;
     }
     //Crear el body
     const user: user = {
-      userName: this.userName,
-      password: this.password
+      dni: this.dni,
+      password: this.password,
+      email: this.email,
+      name: this.name,
+      surname: this.surname
+
     }
     this.loading = true;
 

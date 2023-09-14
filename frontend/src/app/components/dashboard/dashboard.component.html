@@ -1,7 +1,39 @@
 <app-navbar></app-navbar>
 <div class="container mt-2 text-left">
 
-  <h2>Productos</h2>
+  <h2>Novedades</h2>
+
+  <app-products-carousel></app-products-carousel><br><br>
+
+  <h2>Productos de Nuestra Seleccion</h2>
+
+  <div class="card" *ngFor="let item of listProducts">
+    <img src="{{item.image}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{item.model}}</h5>
+      <p class="card-text">{{item.description}}
+      </p>
+      <button class="btn btn-secondary" (click)="findProduct(item)" style="margin-right: 30%;">Ver Mas</button>
+      <button class="btn btn-success" routerLink="/dashboard/shopping">Comprar</button>
+
+    </div>
+  </div>
+  <app-product-information *ngIf="oneProduct!=null" [hidden] [oneProduct]="oneProduct"></app-product-information>
+  <br><br><br><br>
+
+  <!-- Repito contenido -->
+  <!-- <div class="card" *ngFor="let item of listProducts">
+    <img src="{{item.image}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{item.name}}</h5>
+      <p class="card-text">{{item.description}}
+      </p>
+      <button class="btn btn-secondary" (click)="infoProduct()" routerLink="/dashboard/product"
+        style="margin-right: 30%;">Ver Mas</button>
+      <button class="btn btn-success" routerLink="/dashboard/shopping">Comprar</button>
+
+    </div>
+  </div>
 
   <div class="card" *ngFor="let item of listProducts">
     <img src="{{item.image}}" class="card-img-top" alt="...">
@@ -9,16 +41,25 @@
       <h5 class="card-title">{{item.name}}</h5>
       <p class="card-text">{{item.description}}
       </p>
-      <a href="#" class="btn btn-secondary" style="margin-right: 33%;">Ver Mas</a>
-      <a href="#" class="btn btn-success">Comprar</a>
+      <button class="btn btn-secondary" (click)="infoProduct()" routerLink="/dashboard/product"
+        style="margin-right: 30%;">Ver Mas</button>
+      <button class="btn btn-success" routerLink="/dashboard/shopping">Comprar</button>
+
     </div>
   </div>
 
+  <div class="card" *ngFor="let item of listProducts">
+    <img src="{{item.image}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{item.name}}</h5>
+      <p class="card-text">{{item.description}}
+      </p>
+      <button class="btn btn-secondary" (click)="infoProduct()" routerLink="/dashboard/product"
+        style="margin-right: 30%;">Ver Mas</button>
+      <button class="btn btn-success" routerLink="/dashboard/shopping">Comprar</button>
 
-
-
-
-
-
+    </div>
+  </div> -->
+  <!-- Dejo de Repetir -->
 </div>
 <app-footer></app-footer>

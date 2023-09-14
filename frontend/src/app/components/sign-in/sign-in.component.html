@@ -3,9 +3,22 @@
     <img class="logo" src="../../../assets/img/cuenta.png" alt="img login">
     <h3>Registrar Usuario</h3>
     <div class="form-floating mb-3  mt-3">
-      <input type="text" [(ngModel)]="userName" class="form-control" placeholder="Ingrese Usuario">
-      <label>Usuario</label>
+      <input type="text" [(ngModel)]="name" class="form-control" placeholder="Ingrese Nombre">
+      <label>Nombre</label>
     </div>
+    <div class="form-floating mb-3  mt-3">
+      <input type="text" [(ngModel)]="surname" class="form-control" placeholder="Ingrese Apellido">
+      <label>Apellido</label>
+    </div>
+    <div class="form-floating mb-3  mt-3">
+      <input type="text" [(ngModel)]="email" class="form-control" placeholder="Ingrese Mail">
+      <label>Email</label>
+    </div>
+    <div class="form-floating mb-3  mt-3">
+      <input type="number" [(ngModel)]="dni" class="form-control" placeholder="Ingrese DNI">
+      <label>DNI</label>
+    </div>
+
     <div class="form-floating mb-3">
       <input type="password" [(ngModel)]="password" class="form-control" placeholder="Ingrese Password">
       <label>Password</label>

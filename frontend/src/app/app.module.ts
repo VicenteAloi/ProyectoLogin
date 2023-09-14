@@ -22,6 +22,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HelpsComponent } from './components/helps/helps.component';
 import { ProductInformationComponent } from './components/product-information/product-information.component';
+import { ProductsCarouselComponent } from './components/products-carousel/products-carousel.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ShoppingComponent } from './components/product-shopping/shopping.component';
 
 
 
@@ -38,7 +42,9 @@ import { ProductInformationComponent } from './components/product-information/pr
     FooterComponent,
     ContactComponent,
     HelpsComponent,
-    ProductInformationComponent
+    ProductInformationComponent,
+    ProductsCarouselComponent,
+    ShoppingComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,7 @@ import { ProductInformationComponent } from './components/product-information/pr
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    }) // ToastrModule added
+    }), CarouselModule.forRoot(), ModalModule.forRoot() // ToastrModule added
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true }

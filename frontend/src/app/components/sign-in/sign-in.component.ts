@@ -13,8 +13,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent {
-  userName: string = '';
   password: string = '';
+  email: string = '';
+  dni: string = '';
+  name: string = '';
+  surname: string = '';
   confirmPassword: string = '';
   loading: boolean = false;
 
@@ -27,7 +30,7 @@ export class SignInComponent {
 
   addUser() {
     //Validar que los campos no sean vacio
-    if (this.userName == '' || this.password == '' || this.confirmPassword == '') {
+    if (this.password == '' || this.confirmPassword == '' || this.email == '') {
       this.toastr.error('Todos los Campos son Obligatorios', 'Error');
       return;
     }
@@ -40,14 +43,18 @@ export class SignInComponent {
 
     //Crear el usuario
     const user: user = {
-      userName: this.userName,
-      password: this.password
+      dni: this.dni,
+      email: this.email,
+      password: this.password,
+      name: this.name,
+      surname: this.surname
     }
+
     this.loading = true;
     this._userService.signIn(user).subscribe({
       next: (v) => {
         this.loading = false;
-        this.toastr.success(`${this.userName} Registrado Exitosamente`, 'Usuario Registrado');
+        this.toastr.success(`Registrado Exitosamente`, 'Usuario Registrado');
         this.router.navigate(['/login']);
       },
       error: (e: HttpErrorResponse) => {

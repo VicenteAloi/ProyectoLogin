@@ -1,5 +1,10 @@
+h2 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
 .card {
-  width: 18rem;
+  width: 19rem;
   display: inline-block;
   margin-left: 15px
 }
