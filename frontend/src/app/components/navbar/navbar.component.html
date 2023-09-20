@@ -1,10 +1,10 @@
 <header>
   <div class="logo">
-    <img width="100px" src="../../../assets/img/cuenta.png" alt="Logo">
+    <a routerLink="/dashboard"><img width="100px" src="../../../assets/img/cuenta.png" alt="Logo"></a>
   </div>
   <nav>
     <ul class="nav-links">
-      <li><a class="btn btn-outline-info" routerLink="/dashboard">
+      <li><a class="btn btn-outline-info">
           Administracion</a>
       </li>
       <li><a class="btn btn-outline-primary" routerLink="/dashboard">
@@ -15,7 +15,7 @@
       </li>
     </ul>
   </nav>
-  <button class="btn btn-outline-success" (click)="logOut()" type="submit">LogOut</button>
+  <button class="btn btn-outline-danger" (click)="logOut()" type="submit">LogOut</button>
 
 </header>
 

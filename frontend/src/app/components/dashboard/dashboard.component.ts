@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { product } from 'src/app/interfaces/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -9,12 +10,15 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class DashboardComponent implements OnInit {
   listProducts: product[] = [];
-  public oneProduct: product | undefined
+  public oneProduct: product | undefined;
+  modalRef: BsModalRef | undefined;
 
-  constructor(private _productService: ProductService) { }
+  constructor(private _productService: ProductService,
+    private _modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.getProducts();
+
   }
 
   getProducts() {
@@ -24,11 +28,11 @@ export class DashboardComponent implements OnInit {
   }
 
   findProduct(item: product) {
-    this.oneProduct = item;
-    // console.log(this.oneProduct);
-    this._productService.triggerProductInfo.emit({
-      data: this.oneProduct
-    })
+    this._productService.setProduct(item)
+  }
+
+  productInfo(template: TemplateRef<any>) {
+    this.modalRef = this._modalService.show(template);
   }
 
 }

@@ -3,8 +3,8 @@ export interface product {
   model: string,
   brand: string
   description: string,
-  price: Float32Array;
-  stock: Int16Array;
+  price: number;
+  stock: number;
   date_register: string;
   date_updated: string;
   image: string;

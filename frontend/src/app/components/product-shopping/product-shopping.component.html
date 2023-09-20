@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+<div class="container-wrapper">
+  <div class="container1">
+    <h2>{{newProduct?.model}}</h2>
+    <h6>{{newProduct?.brand}}</h6><br>
+    <img src="{{newProduct?.image}}" style="width: 30%;" alt="">
+  </div>
+  <div class="container2">
+    <p>DESCRIPCION {{newProduct?.description}}</p><br>
+    <p>PRECIO: ${{newProduct?.price}}</p><br>
+    <p>STOCK: {{newProduct?.stock}}</p><br>
+    <p>CREACION: {{newProduct?.date_register}}</p>
+    <button [disabled]="newProduct?.stock==0 " class="btn btn-outline-success">Agregar al Carrito</button>
+    <input type="number" [defaultValue]="1" class="amount" #amount>
+  </div>
+</div>
+<footer>
+  <app-footer></app-footer>
+</footer>

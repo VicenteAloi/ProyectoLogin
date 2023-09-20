@@ -6,7 +6,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductInformationComponent } from './components/product-information/product-information.component';
-import { ShoppingComponent } from './components/product-shopping/shopping.component';
+import { ProductShoppingComponent } from './components/product-shopping/product-shopping.component';
+
 
 
 
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: 'signin', component: SignInComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'dashboard/product', component: ProductInformationComponent },
-  { path: 'dashboard/shopping', component: ShoppingComponent },
+  { path: 'dashboard/shopping', component: ProductShoppingComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];

@@ -4,7 +4,25 @@ h2 {
 }
 
 .card {
-  width: 19rem;
+  width: 18rem;
+  border: 1px solid #ccc;
   display: inline-block;
-  margin-left: 15px
+  margin-left: 15px;
+}
+
+.card img {
+  height: auto;
+  background-size: contain;
+  background-position: center;
+}
+
+
+
+.modal-body {
+  display: flex;
+}
+
+.modal-body-right img {
+  width: 150px;
+
 }

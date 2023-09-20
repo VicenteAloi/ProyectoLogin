@@ -21,11 +21,14 @@ import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HelpsComponent } from './components/helps/helps.component';
+
 import { ProductInformationComponent } from './components/product-information/product-information.component';
 import { ProductsCarouselComponent } from './components/products-carousel/products-carousel.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ShoppingComponent } from './components/product-shopping/shopping.component';
+
+import { ProductShoppingComponent } from './components/product-shopping/product-shopping.component';
+
 
 
 
@@ -44,7 +47,7 @@ import { ShoppingComponent } from './components/product-shopping/shopping.compon
     HelpsComponent,
     ProductInformationComponent,
     ProductsCarouselComponent,
-    ShoppingComponent
+    ProductShoppingComponent
   ],
   imports: [
     BrowserModule,

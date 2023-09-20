@@ -11,14 +11,37 @@
     <img src="{{item.image}}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{item.model}}</h5>
-      <p class="card-text">{{item.description}}
+      <p class="card-text">{{item.brand}}
       </p>
-      <button class="btn btn-secondary" (click)="findProduct(item)" style="margin-right: 30%;">Ver Mas</button>
-      <button class="btn btn-success" routerLink="/dashboard/shopping">Comprar</button>
+      <button class="btn btn-secondary" (click)="productInfo(template)" style="margin-right: 30%;">Ver Mas</button>
+
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{item.model}}</h4>
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="modal-body-right">
+            {{item.brand}}
+            <img src="{{item.image}}" alt="">
+          </div>
+          <div class="modal-body left">
+            {{item.description}}
+          </div>
+
+        </div>
+      </ng-template>
+
+      <button class="btn btn-success" (click)="findProduct(item)" routerLink="/dashboard/shopping">Comprar</button>
 
     </div>
   </div>
-  <app-product-information *ngIf="oneProduct!=null" [hidden] [oneProduct]="oneProduct"></app-product-information>
+
+  <!--  -->
+
   <br><br><br><br>
 
   <!-- Repito contenido -->
