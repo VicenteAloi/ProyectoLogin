@@ -17,7 +17,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const user_1 = require("../models/user");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { password, email, name, surname, dni } = req.body;
+    const { password, email, name, surname, dni, isAdmin } = req.body;
     const hashedPassword = yield bcrypt_1.default.hash(password, 10);
     //Validacion de si el usuario ya existe en la bd
     const user = yield user_1.User.findOne({ where: { email: email } });
@@ -32,7 +32,8 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             password: hashedPassword,
             name: name,
             surname: surname,
-            dni: dni
+            dni: dni,
+            isAdmin: isAdmin
         });
         res.json({
             msg: ` usuario creado exitosamente`,
@@ -46,14 +47,8 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.newUser = newUser;
-// export const loginUser = (req: Request, res: Response) => {
-//   const { body } = req;
-//   res.json({
-//     msg: 'Login User',
-//     body
-//   })} 
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password } = req.body;
+    const { email, password, adminLogin } = req.body;
     //Validamos si el usuario existe en la bd
     const user = yield user_1.User.findOne({ where: { email: email } });
     if (!user) {
@@ -68,10 +63,27 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             msg: "Password Incorrecto"
         });
     }
+    if (user.isAdmin != adminLogin) {
+        if (user.isAdmin) {
+            return res.status(400).json({
+                msg: "No es Usuario"
+            });
+        }
+        else {
+            return res.status(400).json({
+                msg: "No es Admin"
+            });
+        }
+    }
     // Generamos token 
     const token = jsonwebtoken_1.default.sign({
-        email: email
+        email: email,
+        isAdmin: adminLogin
     }, process.env.SECRET_KEY || 'pepito123');
     res.json(token);
 });
 exports.loginUser = loginUser;
+// export const getUsers = async (req: Request, res: Response) => {
+//   const listUsers = await User.findAll();
+//   res.json(listUsers)
+// };

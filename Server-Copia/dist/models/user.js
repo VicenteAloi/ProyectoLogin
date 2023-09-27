@@ -30,4 +30,7 @@ exports.User = connection_1.default.define('user', {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
+    isAdmin: {
+        type: sequelize_1.DataTypes.BOOLEAN
+    }
 });

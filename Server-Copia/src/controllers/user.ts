@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 
 export const newUser = async (req: Request, res: Response) => {
 
-  const { password, email, name, surname, dni } = req.body;
+  const { password, email, name, surname, dni, isAdmin } = req.body;
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -25,7 +25,8 @@ export const newUser = async (req: Request, res: Response) => {
       password: hashedPassword,
       name: name,
       surname: surname,
-      dni: dni
+      dni: dni,
+      isAdmin: isAdmin
     });
 
     res.json({
@@ -42,18 +43,9 @@ export const newUser = async (req: Request, res: Response) => {
 
 }
 
-// export const loginUser = (req: Request, res: Response) => {
-//   const { body } = req;
-
-//   res.json({
-//     msg: 'Login User',
-//     body
-//   })} 
-
-
 
 export const loginUser = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { email, password, adminLogin } = req.body;
 
   //Validamos si el usuario existe en la bd
   const user: any = await User.findOne({ where: { email: email } })
@@ -72,13 +64,31 @@ export const loginUser = async (req: Request, res: Response) => {
     })
   }
 
+  if (user.isAdmin != adminLogin) {
+    if (user.isAdmin) {
+      return res.status(400).json({
+        msg: "No es Usuario"
+      })
+    } else {
+      return res.status(400).json({
+        msg: "No es Admin"
+      })
+    }
+
+  }
+
   // Generamos token 
 
   const token = jwt.sign({
-    email: email
+    email: email,
+    isAdmin: adminLogin
   }, process.env.SECRET_KEY || 'pepito123',/* expiresIn: 't en ms' Para que el token expire en un tiempo t */);
 
   res.json(token);
 
 }
 
+// export const getUsers = async (req: Request, res: Response) => {
+//   const listUsers = await User.findAll();
+//   res.json(listUsers)
+// };
