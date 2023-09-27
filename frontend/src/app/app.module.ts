@@ -28,6 +28,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { ProductShoppingComponent } from './components/product-shopping/product-shopping.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 
@@ -47,7 +48,8 @@ import { ProductShoppingComponent } from './components/product-shopping/product-
     HelpsComponent,
     ProductInformationComponent,
     ProductsCarouselComponent,
-    ProductShoppingComponent
+    ProductShoppingComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

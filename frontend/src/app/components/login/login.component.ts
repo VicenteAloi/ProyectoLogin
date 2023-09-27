@@ -17,6 +17,9 @@ export class LoginComponent {
   dni: string = '';
   name: string = '';
   surname: string = '';
+  isAdmin: boolean = false;
+  codAdmin: string = '';
+  adminLogin: boolean = false;
   loading: boolean = false;
 
   constructor(private toastr: ToastrService,
@@ -31,22 +34,30 @@ export class LoginComponent {
       this.toastr.error('Todos los Campos son Obligatorios', 'Error');
       return;
     }
+
+
     //Crear el body
-    const user: user = {
+    const user: any = {
       dni: this.dni,
       password: this.password,
       email: this.email,
       name: this.name,
-      surname: this.surname
-
+      surname: this.surname,
+      isAdmin: this.isAdmin,
+      adminLogin: this.adminLogin
     }
+
     this.loading = true;
 
     this._userService.login(user).subscribe({
-
       next: (token) => {
         localStorage.setItem('token', token);
-        this.router.navigate(['/dashboard'])
+        if (this.adminLogin) {
+          this.router.navigate(['/admin'])
+        } else {
+          this.router.navigate(['/dashboard'])
+        }
+
       },
       error: (e: HttpErrorResponse) => {
         this._errorService.msjError(e);
@@ -55,4 +66,36 @@ export class LoginComponent {
     });
 
   }
+
+  // login2() {
+  //   //Validar que el usuario ingrese datos
+  //   if (this.email == '' || this.password == '') {
+  //     this.toastr.error('Todos los Campos son Obligatorios', 'Error');
+  //     return;
+  //   }
+  //   this.loading = true;
+
+  //   this._userService.getUsers().subscribe(data => {
+  //     const users = data;
+  //     users.forEach(element => {
+  //       if(element.email==this.email && element.password==this.password && element.isAdmin==this.adminLogin){
+
+  //       }
+  //       });
+  //   });
+
+
+
+
 }
+
+
+
+
+// next: (token) => {
+//   localStorage.setItem('token', token);
+// },
+//   error: (e: HttpErrorResponse) => {
+//     this._errorService.msjError(e);
+//     this.loading = false;
+//   }

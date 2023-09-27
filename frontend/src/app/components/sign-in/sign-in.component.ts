@@ -18,6 +18,7 @@ export class SignInComponent {
   dni: string = '';
   name: string = '';
   surname: string = '';
+  isAdmin: boolean = false;
   confirmPassword: string = '';
   loading: boolean = false;
 
@@ -47,7 +48,8 @@ export class SignInComponent {
       email: this.email,
       password: this.password,
       name: this.name,
-      surname: this.surname
+      surname: this.surname,
+      isAdmin: this.isAdmin
     }
 
     this.loading = true;

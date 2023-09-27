@@ -2,13 +2,15 @@
 html,
 body {
   height: 100%;
+  background-color: rgb(195, 195, 194);
 }
 
 .wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(215, 202, 185, 0.45);
+  background-image: url(https://wallpapercave.com/wp/wp6994803.jpg);
+  background-size: cover;
   height: 100%;
 }
 
