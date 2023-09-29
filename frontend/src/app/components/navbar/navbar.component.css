@@ -46,6 +46,10 @@ header .nav-links li {
 }
 
 
+.dropdown-item {
+  cursor: pointer;
+}
+
 /*
 header .nav-links li:hover {
   transform: scale(1.1);

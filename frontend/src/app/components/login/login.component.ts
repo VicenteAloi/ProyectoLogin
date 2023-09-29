@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { user } from 'src/app/interfaces/user';
@@ -14,19 +15,19 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent {
   password: string = '';
   email: string = '';
-  dni: string = '';
-  name: string = '';
-  surname: string = '';
   isAdmin: boolean = false;
-  codAdmin: string = '';
   adminLogin: boolean = false;
   loading: boolean = false;
 
+
+
   constructor(private toastr: ToastrService,
-    private _userService: UserService,
+    private userService: UserService,
     private router: Router,
-    private _errorService: ErrorService
-  ) { }
+    private errorService: ErrorService
+  ) {
+    localStorage.clear();
+  }
 
   login() {
     //Validar que el usuario ingrese datos
@@ -37,65 +38,36 @@ export class LoginComponent {
 
 
     //Crear el body
-    const user: any = {
-      dni: this.dni,
+    let user: any = {
       password: this.password,
       email: this.email,
-      name: this.name,
-      surname: this.surname,
       isAdmin: this.isAdmin,
       adminLogin: this.adminLogin
     }
 
     this.loading = true;
 
-    this._userService.login(user).subscribe({
-      next: (token) => {
-        localStorage.setItem('token', token);
-        if (this.adminLogin) {
-          this.router.navigate(['/admin'])
+    this.userService.login(user).subscribe({
+      next: (res: any) => {
+        const { tok, us } = res
+        this.userService.setThisUser(us);
+        localStorage.setItem('token', tok);
+        localStorage.setItem('user', JSON.stringify(us))
+        if (us.isAdmin) {
+          this.router.navigate([`/admin`])
         } else {
-          this.router.navigate(['/dashboard'])
+          this.router.navigate([`/dashboard`])
         }
-
       },
       error: (e: HttpErrorResponse) => {
-        this._errorService.msjError(e);
+        this.errorService.msjError(e);
         this.loading = false;
       }
     });
 
+
   }
-
-  // login2() {
-  //   //Validar que el usuario ingrese datos
-  //   if (this.email == '' || this.password == '') {
-  //     this.toastr.error('Todos los Campos son Obligatorios', 'Error');
-  //     return;
-  //   }
-  //   this.loading = true;
-
-  //   this._userService.getUsers().subscribe(data => {
-  //     const users = data;
-  //     users.forEach(element => {
-  //       if(element.email==this.email && element.password==this.password && element.isAdmin==this.adminLogin){
-
-  //       }
-  //       });
-  //   });
-
 
 
 
 }
-
-
-
-
-// next: (token) => {
-//   localStorage.setItem('token', token);
-// },
-//   error: (e: HttpErrorResponse) => {
-//     this._errorService.msjError(e);
-//     this.loading = false;
-//   }

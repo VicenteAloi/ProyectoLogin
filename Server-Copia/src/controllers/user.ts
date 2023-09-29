@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { User } from '../models/user';
 import jwt from 'jsonwebtoken'
+import { json } from 'sequelize';
 
 export const newUser = async (req: Request, res: Response) => {
 
@@ -55,8 +56,8 @@ export const loginUser = async (req: Request, res: Response) => {
       msg: "No existe usuario"
     })
   }
-  //Validamos password
 
+  //Validamos password
   const passwordValid = await bcrypt.compare(password, user.password)
   if (!passwordValid) {
     return res.status(400).json({
@@ -74,21 +75,30 @@ export const loginUser = async (req: Request, res: Response) => {
         msg: "No es Admin"
       })
     }
-
   }
 
   // Generamos token 
-
   const token = jwt.sign({
     email: email,
     isAdmin: adminLogin
   }, process.env.SECRET_KEY || 'pepito123',/* expiresIn: 't en ms' Para que el token expire en un tiempo t */);
 
-  res.json(token);
+  const obj = {
+    tok: token,
+    us: user,
+  };
+
+  res.json(obj);
 
 }
 
-// export const getUsers = async (req: Request, res: Response) => {
-//   const listUsers = await User.findAll();
-//   res.json(listUsers)
-// };
+export const getUsers = async (req: Request, res: Response) => {
+  const listOfUsers = await User.findAll();
+  res.json(listOfUsers);
+}
+
+export const getUser = async (req: Request, res: Response) => {
+  const { email } = req.params;
+  const oneUser = await User.findOne({ where: { email: email } });
+  res.json(oneUser);
+}

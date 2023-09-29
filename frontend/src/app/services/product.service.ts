@@ -4,7 +4,7 @@ import { environment } from '../environments/environments';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { product } from '../interfaces/product';
-import { NodeWithI18n } from '@angular/compiler';
+
 
 
 @Injectable({
@@ -27,6 +27,7 @@ export class ProductService {
   setProduct(newProduct: product) {
     this.productInfo.next(newProduct);
   }
+
   getProduct() {
     return this.productInfo.asObservable();
   }
@@ -42,9 +43,6 @@ export class ProductService {
   }
 
   getProducts(): Observable<product[]> {
-    // const token = localStorage.getItem('token')
-    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
-    // return this.http.get<products[]>(`${this.myAppUrl}${this.myApiUrl}`, { headers: headers });
     return this.http.get<product[]>(`${this.myAppUrl}${this.myApiUrl}`)
   }
 

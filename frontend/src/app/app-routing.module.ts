@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'dashboard/product', component: ProductInformationComponent },
-  { path: 'dashboard/shopping', component: ProductShoppingComponent },
+  { path: 'dashboard/shopping/:id', component: ProductShoppingComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];

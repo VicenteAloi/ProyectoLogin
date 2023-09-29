@@ -1,7 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { product } from 'src/app/interfaces/product';
+import { user } from 'src/app/interfaces/user';
 import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,27 +16,54 @@ export class DashboardComponent implements OnInit {
   listProducts: product[] = [];
   public oneProduct: product | undefined;
   modalRef: BsModalRef | undefined;
+  usera: any;
+  errorService: any;
 
-  constructor(private _productService: ProductService,
-    private _modalService: BsModalService) { }
 
-  ngOnInit(): void {
-    this.getProducts();
+
+  constructor(private productService: ProductService,
+    private modalService: BsModalService,
+    private userService: UserService,
+    private router: Router) {
+
+
 
   }
 
+  ngOnInit(): void {
+    this.getProducts();
+    this.getUser();
+
+    this.usera = localStorage.getItem('user');
+    this.usera = (JSON.parse(this.usera))
+  }
+
   getProducts() {
-    this._productService.getProducts().subscribe(data => {
+    this.productService.getProducts().subscribe(data => {
       this.listProducts = data;
     })
   }
 
   findProduct(item: product) {
-    this._productService.setProduct(item)
+    this.productService.setProduct(item);
+    this.router.navigate([`dashboard/shopping/${item.id}`])
+
   }
 
   productInfo(template: TemplateRef<any>) {
-    this.modalRef = this._modalService.show(template);
+    this.modalRef = this.modalService.show(template);
   }
+
+  getUser() {
+    this.userService.getThisUser();
+  }
+
+
+
+
+
+
+
+
 
 }

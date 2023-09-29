@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container mt-2 text-left">
 
-  <h2>Novedades</h2>
+  <h2>Novedades {{usera?.name}}</h2>
 
   <app-products-carousel></app-products-carousel><br><br>
 
@@ -35,7 +35,7 @@
         </div>
       </ng-template>
 
-      <button class="btn btn-success" (click)="findProduct(item)" routerLink="/dashboard/shopping">Comprar</button>
+      <button class="btn btn-success" (click)="findProduct(item)">Comprar</button>
 
     </div>
   </div>

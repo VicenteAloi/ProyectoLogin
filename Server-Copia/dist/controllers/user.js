@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginUser = exports.newUser = void 0;
+exports.getUser = exports.getUsers = exports.loginUser = exports.newUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const user_1 = require("../models/user");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -80,10 +80,21 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         email: email,
         isAdmin: adminLogin
     }, process.env.SECRET_KEY || 'pepito123');
-    res.json(token);
+    const obj = {
+        tok: token,
+        us: user,
+    };
+    res.json(obj);
 });
 exports.loginUser = loginUser;
-// export const getUsers = async (req: Request, res: Response) => {
-//   const listUsers = await User.findAll();
-//   res.json(listUsers)
-// };
+const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const listOfUsers = yield user_1.User.findAll();
+    res.json(listOfUsers);
+});
+exports.getUsers = getUsers;
+const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email } = req.params;
+    const oneUser = yield user_1.User.findOne({ where: { email: email } });
+    res.json(oneUser);
+});
+exports.getUser = getUser;
