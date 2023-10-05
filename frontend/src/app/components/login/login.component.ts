@@ -41,11 +41,14 @@ export class LoginComponent {
     let user: any = {
       password: this.password,
       email: this.email,
-      isAdmin: this.isAdmin,
       adminLogin: this.adminLogin
     }
 
     this.loading = true;
+
+    if (this.adminLogin) {
+
+    }
 
     this.userService.login(user).subscribe({
       next: (res: any) => {
@@ -53,7 +56,7 @@ export class LoginComponent {
         this.userService.setThisUser(us);
         localStorage.setItem('token', tok);
         localStorage.setItem('user', JSON.stringify(us))
-        if (us.isAdmin) {
+        if (this.adminLogin) {
           this.router.navigate([`/admin`])
         } else {
           this.router.navigate([`/dashboard`])

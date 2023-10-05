@@ -18,6 +18,10 @@ const product_1 = __importDefault(require("../routes/product"));
 const user_1 = __importDefault(require("../routes/user"));
 const product_2 = require("./product");
 const user_2 = require("./user");
+const domicile_1 = require("./domicile");
+const publication_1 = require("./publication");
+const sales_1 = require("./sales");
+const shipping_1 = require("./shipping");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -46,6 +50,10 @@ class Server {
             try {
                 yield product_2.Product.sync();
                 yield user_2.User.sync();
+                yield domicile_1.Domicile.sync();
+                yield shipping_1.Shipping.sync();
+                yield publication_1.Publication.sync();
+                yield sales_1.Sales.sync();
             }
             catch (error) {
                 console.log('Unable to connect to the database: ', error);

@@ -4,32 +4,29 @@
   </div>
   <nav>
     <ul class="nav-links">
-      <li><a class="btn btn-outline-info">
-          Administracion</a>
+      <li><button *ngIf="user.isAdmin" class="btn btn-outline-info" routerLink="/admin">
+          Administracion</button>
       </li>
       <li><a class="btn btn-outline-primary" routerLink="/dashboard">
           Productos</a>
-      </li>
-      <li><a class="btn btn-outline-primary" routerLink="/dashboard">
-          Mi Cuenta</a>
       </li>
     </ul>
   </nav>
 
 
   <div class="btn-group" dropdown>
-    <button type="button" class="btn btn-outline-danger">Mi Perfil</button>
+    <button type="button" class="btn btn-outline-danger" routerLink="/dashboard/userProfile">{{user.name}}</button>
     <button id="button-split" type="button" dropdownToggle class="btn btn-danger dropdown-toggle dropdown-toggle-split"
       aria-controls="dropdown-split">
       <span class="caret"></span>
       <span class="sr-only visually-hidden">Split button!</span>
     </button>
     <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split">
-      <li role="menuitem"><a class="dropdown-item">Action</a></li>
-      <li role="menuitem"><a class="dropdown-item">Another action</a>
-      </li>
-      <li role="menuitem"><a class="dropdown-item">Something else
-          here</a></li>
+      <li role="menuitem"><a *ngIf="!user.isAdmin" class="dropdown-item">Modificar Perfil</a></li>
+      <li role="menuitem"><a *ngIf="!user.isAdmin" class="dropdown-item">Mis Compras</a></li>
+      <li role="menuitem"><a *ngIf="user.isAdmin" class="dropdown-item">Modificar Administradores</a></li>
+      <li role="menuitem"><a *ngIf="user.isAdmin" class="dropdown-item">Agregar Productos</a></li>
+
       <li class="divider dropdown-divider"></li>
       <li role="menuitem"><a class="dropdown-item" (click)="logOut()">LogOut</a>
       </li>

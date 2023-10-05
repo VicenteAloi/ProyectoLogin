@@ -12,10 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUser = exports.getUsers = exports.loginUser = exports.newUser = void 0;
+exports.getCustomer = exports.getAdmins = exports.loginUser = exports.newUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const user_1 = require("../models/user");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const connection_1 = __importDefault(require("../db/connection"));
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { password, email, name, surname, dni, isAdmin } = req.body;
     const hashedPassword = yield bcrypt_1.default.hash(password, 10);
@@ -66,7 +67,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (user.isAdmin != adminLogin) {
         if (user.isAdmin) {
             return res.status(400).json({
-                msg: "No es Usuario"
+                msg: "No es Cliente"
             });
         }
         else {
@@ -87,14 +88,22 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json(obj);
 });
 exports.loginUser = loginUser;
-const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const listOfUsers = yield user_1.User.findAll();
-    res.json(listOfUsers);
+const getAdmins = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    connection_1.default.query('Select * from users where users.isAdmin is true')
+        .then((users) => {
+        if (users[0].length > 0) {
+            res.status(200).json(users[0]);
+        }
+    }).catch(() => {
+        res.status(400).send({
+            msg: 'No hay Administradores Cargados'
+        });
+    });
 });
-exports.getUsers = getUsers;
-const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getAdmins = getAdmins;
+const getCustomer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = req.params;
     const oneUser = yield user_1.User.findOne({ where: { email: email } });
     res.json(oneUser);
 });
-exports.getUser = getUser;
+exports.getCustomer = getCustomer;

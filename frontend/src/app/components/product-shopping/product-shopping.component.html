@@ -12,6 +12,17 @@
     <p>CREACION: {{newProduct?.date_register}}</p>
     <button [disabled]="newProduct?.stock==0 " class="btn btn-outline-success">Agregar al Carrito</button>
     <input type="number" [defaultValue]="1" class="amount" #amount>
+
+
+
+    <div class="rate">
+      <rating [max]="5" [(ngModel)]="y" [customTemplate]="tt"></rating>
+      <ng-template #tt let-i="index" let-v="value">
+        <button class="btn btn-{{i < v ? 'warning' : 'default'}}">
+          {{i < v ? '&#9733;' : '&#9734;' }} </button>
+      </ng-template>
+    </div>
+
   </div>
 </div>
 <footer>

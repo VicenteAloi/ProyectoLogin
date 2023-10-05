@@ -14,27 +14,35 @@ exports.Product = connection_1.default.define('product', {
     },
     model: {
         type: sequelize_1.DataTypes.STRING,
+        unique: true,
         allowNull: false
     },
     brand: {
-        type: sequelize_1.DataTypes.STRING
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     },
     description: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     },
     image: {
-        type: sequelize_1.DataTypes.STRING
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     },
     price: {
-        type: sequelize_1.DataTypes.REAL
+        type: sequelize_1.DataTypes.REAL,
+        allowNull: false
     },
     stock: {
-        type: sequelize_1.DataTypes.INTEGER
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false
     },
     date_register: {
-        type: sequelize_1.DataTypes.STRING
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     },
     date_updated: {
-        type: sequelize_1.DataTypes.STRING
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     }
 });

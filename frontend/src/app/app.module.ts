@@ -30,6 +30,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProductShoppingComponent } from './components/product-shopping/product-shopping.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { RatingModule } from 'ngx-bootstrap/rating';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 
@@ -50,7 +52,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ProductInformationComponent,
     ProductsCarouselComponent,
     ProductShoppingComponent,
-    AdminComponent
+    AdminComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    }), CarouselModule.forRoot(), ModalModule.forRoot(), BsDropdownModule.forRoot() // ToastrModule added
+    }), CarouselModule.forRoot(), ModalModule.forRoot(), BsDropdownModule.forRoot(), RatingModule.forRoot() // ToastrModule added
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true }

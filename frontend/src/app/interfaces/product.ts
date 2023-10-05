@@ -1,5 +1,5 @@
 export interface product {
-  id: number,
+  id: number, //PK
   model: string,
   brand: string
   description: string,

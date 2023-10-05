@@ -4,11 +4,16 @@ import sequelize from "../db/connection";
 
 export const User = sequelize.define('user', {
 
+  id: {
+    type: DataTypes.INTEGER,
+    unique: true,
+    autoIncrement: true,
+    primaryKey: true
+  },
   dni: {
     type: DataTypes.STRING,
     unique: true,
     allowNull: false,
-    primaryKey: true
   },
   email: {
     type: DataTypes.STRING,

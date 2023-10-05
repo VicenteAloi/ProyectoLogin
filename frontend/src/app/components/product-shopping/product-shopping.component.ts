@@ -11,6 +11,8 @@ import { __param } from 'tslib';
   styleUrls: ['./product-shopping.component.css']
 })
 export class ProductShoppingComponent implements OnInit {
+  x = 5;
+  y = 2;
   newProduct: product | undefined;
   product: any;
   listOfProducts: product[] = [];

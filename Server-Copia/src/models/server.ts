@@ -4,6 +4,10 @@ import routesProduct from '../routes/product';
 import routesUsers from '../routes/user';
 import { Product } from './product';
 import { User } from './user';
+import { Domicile } from './domicile';
+import { Publication } from './publication';
+import { Sales } from './sales';
+import { Shipping } from './shipping';
 
 class Server {
   private app: express.Application;
@@ -16,8 +20,6 @@ class Server {
     this.midlewares();
     this.routes();
     this.dbConnect();
-
-
   }
 
   listen() {
@@ -42,6 +44,10 @@ class Server {
     try {
       await Product.sync();
       await User.sync();
+      await Domicile.sync();
+      await Shipping.sync();
+      await Publication.sync();
+      await Sales.sync();
     } catch (error) {
       console.log('Unable to connect to the database: ', error);
     }

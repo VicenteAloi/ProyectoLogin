@@ -33,14 +33,12 @@ export class UserService {
     return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`, user);
   }
 
-  getUsers() {
-    return this.http.get<user[]>(`${this.myAppUrl}${this.myApiUrl}`);
+  getAdmins() {
+    return this.http.get<user[]>(`${this.myAppUrl}${this.myApiUrl}/admin`);
   }
+
   getUser(email: string): Observable<any> {
     return this.http.get<user>(`${this.myAppUrl}${this.myApiUrl}/login/${email}`);
   }
-
-
-
 
 }

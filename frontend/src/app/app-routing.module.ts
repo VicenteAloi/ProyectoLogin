@@ -8,6 +8,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductInformationComponent } from './components/product-information/product-information.component';
 import { ProductShoppingComponent } from './components/product-shopping/product-shopping.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { HelpsComponent } from './components/helps/helps.component';
 
 
 
@@ -19,9 +21,15 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SignInComponent },
   { path: 'admin', component: AdminComponent },
+
+
+
+
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard/helps', component: HelpsComponent },
   { path: 'dashboard/product', component: ProductInformationComponent },
   { path: 'dashboard/shopping/:id', component: ProductShoppingComponent },
+  { path: 'dashboard/userProfile', component: UserProfileComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];

@@ -43,7 +43,7 @@ export class SignInComponent {
     }
 
     //Crear el usuario
-    const user: user = {
+    const user: any = {
       dni: this.dni,
       email: this.email,
       password: this.password,
