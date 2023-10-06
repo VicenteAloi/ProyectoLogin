@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import routesProduct from '../routes/product';
 import routesUsers from '../routes/user';
+import routesCustomers from '../routes/customers';
+import routesAdministrator from '../routes/administrator'
 import { Product } from './product';
 import { User } from './user';
 import { Domicile } from './domicile';
@@ -32,6 +34,8 @@ class Server {
   routes() {
     this.app.use('/api/products', routesProduct);
     this.app.use('/api/users', routesUsers);
+    this.app.use('/api/customers', routesCustomers);
+    this.app.use('/api/Administrators', routesAdministrator)
   }
 
   midlewares() {

@@ -12,42 +12,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCustomer = exports.getAdmins = exports.loginUser = exports.newUser = void 0;
+exports.getCustomer = exports.loginUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const user_1 = require("../models/user");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const connection_1 = __importDefault(require("../db/connection"));
-const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { password, email, name, surname, dni, isAdmin } = req.body;
-    const hashedPassword = yield bcrypt_1.default.hash(password, 10);
-    //Validacion de si el usuario ya existe en la bd
-    const user = yield user_1.User.findOne({ where: { email: email } });
-    if (user) {
-        return res.status(400).json({
-            msg: `Ya existe un usuario con el mail ${email}`
-        });
-    }
-    try {
-        yield user_1.User.create({
-            email: email,
-            password: hashedPassword,
-            name: name,
-            surname: surname,
-            dni: dni,
-            isAdmin: isAdmin
-        });
-        res.json({
-            msg: ` usuario creado exitosamente`,
-        });
-    }
-    catch (error) {
-        res.status(400).json({
-            msg: 'Ocurrio un Error',
-            error
-        });
-    }
-});
-exports.newUser = newUser;
+// export const newUser = async (req: Request, res: Response) => {
+//   const { password, email, name, surname, dni, isAdmin } = req.body;
+//   const hashedPassword = await bcrypt.hash(password, 10);
+//   //Validacion de si el usuario ya existe en la bd
+//   const user = await User.findOne({ where: { email: email } })
+//   if (user) {
+//     return res.status(400).json({
+//       msg: `Ya existe un usuario con el mail ${email}`
+//     })
+//   }
+//   try {
+//     await User.create({
+//       email: email,
+//       password: hashedPassword,
+//       name: name,
+//       surname: surname,
+//       dni: dni,
+//       isAdmin: isAdmin
+//     });
+//     res.json({
+//       msg: ` usuario creado exitosamente`,
+//     })
+//   } catch (error) {
+//     res.status(400).json({
+//       msg: 'Ocurrio un Error',
+//       error
+//     });
+//   }
+// }
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password, adminLogin } = req.body;
     //Validamos si el usuario existe en la bd
@@ -76,7 +73,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
         }
     }
-    // Generamos token 
+    // Generamos token
     const token = jsonwebtoken_1.default.sign({
         email: email,
         isAdmin: adminLogin
@@ -88,19 +85,18 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json(obj);
 });
 exports.loginUser = loginUser;
-const getAdmins = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    connection_1.default.query('Select * from users where users.isAdmin is true')
-        .then((users) => {
-        if (users[0].length > 0) {
-            res.status(200).json(users[0]);
-        }
-    }).catch(() => {
-        res.status(400).send({
-            msg: 'No hay Administradores Cargados'
-        });
-    });
-});
-exports.getAdmins = getAdmins;
+// export const getAdmins = async (req: Request, res: Response) => {
+//   connection.query('Select * from users where users.isAdmin is true')
+//     .then((users) => {
+//       if (users[0].length > 0) {
+//         res.status(200).json(users[0])
+//       }
+//     }).catch(() => {
+//       res.status(400).send({
+//         msg: 'No hay Administradores Cargados'
+//       })
+//     })
+// }
 const getCustomer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = req.params;
     const oneUser = yield user_1.User.findOne({ where: { email: email } });

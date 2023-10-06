@@ -16,6 +16,8 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const product_1 = __importDefault(require("../routes/product"));
 const user_1 = __importDefault(require("../routes/user"));
+const customers_1 = __importDefault(require("../routes/customers"));
+const administrator_1 = __importDefault(require("../routes/administrator"));
 const product_2 = require("./product");
 const user_2 = require("./user");
 const domicile_1 = require("./domicile");
@@ -39,6 +41,8 @@ class Server {
     routes() {
         this.app.use('/api/products', product_1.default);
         this.app.use('/api/users', user_1.default);
+        this.app.use('/api/customers', customers_1.default);
+        this.app.use('/api/Administrators', administrator_1.default);
     }
     midlewares() {
         // Parseo Body

@@ -1,13 +1,14 @@
 import { Router } from "express";
-import { getCustomer, getAdmins, loginUser, newUser } from "../controllers/user";
+
+import { getCustomer, loginUser } from "../controllers/user";
+import validateToken from "./validate-token";
+
 
 
 const router = Router();
 
-router.post('/', newUser);
-router.post('/login', loginUser);
-router.get('/admin', getAdmins);
-router.get('/login/:email', getCustomer)
 
+router.post('/login', loginUser);
+router.get('/login/:email', getCustomer)
 
 export default router;
