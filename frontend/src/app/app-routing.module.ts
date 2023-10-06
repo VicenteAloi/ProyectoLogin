@@ -7,9 +7,14 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductInformationComponent } from './components/product-information/product-information.component';
 import { ProductShoppingComponent } from './components/product-shopping/product-shopping.component';
-import { AdminComponent } from './components/admin/admin.component';
+
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HelpsComponent } from './components/helps/helps.component';
+
+import { PanelAdministradorComponent } from './components/administrador/panel-administrador/panel-administrador.component';
+import { ProductosComponent } from './components/administrador/productos/productos.component';
+import { AdministratorComponent } from './components/administrador/administrator/administrator.component';
+import { VentasComponent } from './components/administrador/ventas/ventas.component';
 
 
 
@@ -20,11 +25,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SignInComponent },
-  { path: 'admin', component: AdminComponent },
 
-
-
-
+  { path: 'admin', component: PanelAdministradorComponent },
+  { path: 'admin/Productos', component: ProductosComponent },
+  { path: 'admin/Clientes', component: AdministratorComponent },
+  { path: 'admin/Ventas', component: VentasComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'dashboard/helps', component: HelpsComponent },
   { path: 'dashboard/product', component: ProductInformationComponent },
@@ -39,3 +44,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+
